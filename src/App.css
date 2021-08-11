@@ -28,6 +28,8 @@
   color: #61dafb;
 }
 
+/* HEADER */
+
 .header div {
   display: flex;
   flex-direction: column;
@@ -38,6 +40,12 @@
 
 .header h1, h3 {
   margin: .5rem 2rem;
+}
+
+/* PHOTO */
+.photo-of-the-day {
+  max-width: 50%;
+  height: auto;
   
 }
 
