@@ -8,40 +8,39 @@ const BASE_URL = "https://api.nasa.gov/planetary/apod";
 const API_KEY = "JGCMBpISHclPx2br4ejYDPQ4daKQueWTxhbYqB71";
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [imgAmount, setImgAmount] = useState(1);
-  const dataArr = []
+ 
+  const button = document.querySelector('button');
+
   useEffect(() => {
     axios.get(`${BASE_URL}?api_key=${API_KEY}&count=${imgAmount}`)
       .then(res => {
         setData(res.data);
       })
-
+      
   }, [imgAmount]);
 
   const increment = () => {
+    if (imgAmount >= 1) {
+      setData(null);
+    }
     setImgAmount(imgAmount + 1);
   };
-  const decrement = () => {
-    if (imgAmount > 1) {
-      setImgAmount(imgAmount - 1);
-    }
+  const reset = () => {
+   
+    setData([])
+    setImgAmount((imgAmount + 1) - imgAmount)
   };
-  
-  let test = [];
-
-  // for (let i = 0; i < )
 
   
-    console.log(data[0])
- 
   
   return (
     <div className="App">
       <h1>Number of Images: {imgAmount}</h1>
       <button id='increment' onClick={increment}>Increment</button>
-      <button id='decrement' onClick={decrement}>Decrement</button>
-      <Photo photo={data[0]} />
+      <button id='decrement' onClick={reset}>Reset</button>
+      <Photo photoArr={data} reset={reset} setData={setData}/>
       
     </div>
   );

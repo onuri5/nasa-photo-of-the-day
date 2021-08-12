@@ -3,23 +3,37 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import App from './App'
 
-let dataArr = [];
-const test = []
+export default function Photo({ photoArr, explanation, reset}) {
+    
+    if (!photoArr) return <h3>Loading...</h3>;
 
-export default function Photo(props) {
+    // console.log(photoArr)
+    // if (reset) {
+    //     photoArr
+    // }
 
-    if (!props.photo) return <h3>Loading...</h3>;
-    console.log(props)
-    if (dataArr[dataArr.length - 1] !== props) {
-        dataArr = props
-        test.push(dataArr)
+ const m8b = (picList) => {
+    if (picList !== null && picList !== undefined) {
+      const urlArr = []
+      urlArr.push(picList.map(item => item.url));
+      
+      urlArr.forEach((link, index) => {
+        const img = document.createElement('img');
+        img.className = 'photo-of-the-day';
+        img.src = link[index];
+        img.alt = "One of NASA's daily upload!";
+        img.key = index;
+        document.body.appendChild(img);
+      })
+     
+      return urlArr
     }
+ } 
 
-    console.log(test);
     return (
         <div>
-        <img className='photo-of-the-day' src={props.photo} alt="NASA's daily upload!"></img>
-        <p>{props.explanation}</p>
+        <div>{m8b(photoArr)}</div>
+        <p>{explanation}</p>
     </div>
     )
 }
