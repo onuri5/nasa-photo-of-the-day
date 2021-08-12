@@ -29,8 +29,8 @@ function App() {
   };
   const reset = () => {
    
-    setData([])
-    setImgAmount((imgAmount + 1) - imgAmount)
+    setData(data[0])
+    setImgAmount(1)
   };
 
   
@@ -40,7 +40,7 @@ function App() {
       <h1>Number of Images: {imgAmount}</h1>
       <button id='increment' onClick={increment}>Increment</button>
       <button id='decrement' onClick={reset}>Reset</button>
-      <Photo photoArr={data} reset={reset} setData={setData}/>
+      <Photo photoArr={data} reset={reset} setData={setData} imgAmount={setImgAmount}/>
       
     </div>
   );

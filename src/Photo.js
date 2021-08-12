@@ -1,39 +1,36 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import App from './App'
+import styled from 'styled-components';
 
-export default function Photo({ photoArr, explanation, reset}) {
+export default function Photo({ photoArr }) {
     
-    if (!photoArr) return <h3>Loading...</h3>;
+  if (!photoArr) return <h3>Loading...</h3>;
 
-    // console.log(photoArr)
-    // if (reset) {
-    //     photoArr
-    // }
+  const StyledImg = styled.div `
+    display: flex;
+  `
+  //  const div = document.getElementsByClassName('sc-bdnxRM gbnBcL');
 
- const m8b = (picList) => {
+  const m8b = (picList) => {
     if (picList !== null && picList !== undefined) {
-      const urlArr = []
-      urlArr.push(picList.map(item => item.url));
+      const urlArr = [];
+      urlArr.push(picList.map(item => [item.url]));
       
-      urlArr.forEach((link, index) => {
-        const img = document.createElement('img');
-        img.className = 'photo-of-the-day';
-        img.src = link[index];
-        img.alt = "One of NASA's daily upload!";
-        img.key = index;
-        document.body.appendChild(img);
-      })
-     
-      return urlArr
+      
+      return urlArr;
     }
  } 
 
+ 
+  m8b(photoArr)
     return (
-        <div>
-        <div>{m8b(photoArr)}</div>
-        <p>{explanation}</p>
-    </div>
-    )
+      // <StyledImg>
+      //   {m8b(photoArr).textContent = null}
+      // </StyledImg>
+      <div>
+        {m8b(photoArr).map((item, index) => {
+          return <img className='photoOfTheDay' key={index} src={item[index]} alt='One of Nasas daily uploads'></img>
+        })}
+      </div>
+    ) 
 }
